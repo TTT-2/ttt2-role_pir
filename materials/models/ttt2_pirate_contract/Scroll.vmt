@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\ttt2_pirate_contract\Scroll_Tex"
+	"$bumpmap" "models\ttt2_pirate_contract\Scroll_Bump"
+	"$phong"     "1"
+	"$halflambert"	1
+	"$phongexponenttexture" "models\ttt2_pirate_contract\Scroll_Roughness"
+ 	"$phongboost"   "1"
+ 	"$phongfresnelranges"   "[.3 .5 1]"
+}
