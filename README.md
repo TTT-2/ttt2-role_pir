@@ -6,5 +6,4 @@ This is the "Pirate" role for TTT2.
 
 ## TODOS:
 * glowing Contract after first master dropped it?? + global message??
-* handling for master role change
 * icons from Tim

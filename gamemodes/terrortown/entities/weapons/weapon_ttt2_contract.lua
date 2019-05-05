@@ -222,4 +222,15 @@ else
 
 		master.is_pir_master = false
 	end)
+
+	hook.Add("TTT2UpdateTeam", "TTT2ChangeTeamWithMaster", function(master, oldTeam, team)
+		if master.is_pir_master then
+			for _, ply in ipairs(player.GetAll()) do
+				if ply:GetBaseRole() == ROLE_PIRATE then
+					ply:UpdateTeam(team)
+				end
+			end
+			SendFullStateUpdate()
+		end
+	end)
 end
