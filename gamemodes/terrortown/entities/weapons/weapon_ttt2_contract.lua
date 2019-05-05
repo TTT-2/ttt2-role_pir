@@ -207,18 +207,18 @@ else
 		SendFullStateUpdate()
 	end)
 
-	hook.Add( "PostPlayerDeath", "TTT2PirNotifyAboutMastersDeath", function(master)
+	hook.Add( "PostPlayerDeath", "TTT2PirHandleMastersDeath", function(master)
+		if not master.is_pir_master then return end
+		
 		for _, ply in ipairs(player.GetAll()) do
-			if ply.pirate_master == master then
+			if ply:GetBaseRole() == ROLE_PIRATE then
 				net.Start("TTT2PirContractTerminatedPirate")
 				net.WriteEntity(master)
 				net.Send(ply)
+				ply:UpdateTeam(TEAM_PIRATE)
 			end
 		end
-
-		if master.is_pir_master then
-
-		end
+		SendFullStateUpdate()
 
 		master.is_pir_master = false
 	end)
