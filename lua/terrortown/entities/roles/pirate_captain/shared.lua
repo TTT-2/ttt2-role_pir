@@ -14,16 +14,13 @@ ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player
 ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
 ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
 ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = true
+ROLE.preventWin = GetConVar("ttt2_pir_win_alone"):GetBool()
 ROLE.avoidTeamIcons = false
 ROLE.notSelectable = true -- role cant be selected!
 
 ROLE.conVarData = {
-	pct = 1, -- necessary: percentage of getting this role selected (per player)
-	maximum = 1, -- maximum amount of roles in a round
-	minPlayers = 7, -- minimum amount of players until this role is able to get selected
-	togglable = true, -- option to toggle a role for a client if possible (F1 menu)
-	credits = 1
+	credits = 2, -- the starting credits of a specific role
+	shopFallback = SHOP_FALLBACK_TRAITOR
 }
 
 -- now link this subrole with its baserole

@@ -11,6 +11,16 @@ roles.InitCustomTeam(ROLE.name, { -- this creates var "TEAM_JESTER"
 		color = Color(207, 148, 68, 255)
 })
 
+local ttt2_pir_win_alone = CreateConVar("ttt2_pir_win_alone", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local ttt2_pir_see_contractor_team = CreateConVar("ttt2_pir_see_contractor_team", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+
+hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicPirCVars", function(tbl)
+	tbl[ROLE_PIRATE] = tbl[ROLE_PIRATE] or {}
+
+	table.insert(tbl[ROLE_PIRATE], {cvar = "ttt2_pir_win_alone", checkbox = true, desc = "Pirates can win as team if they have no live contract (Def. 0)"})
+	--table.insert(tbl[ROLE_PIRATE], {cvar = "ttt2_pir_see_contractor_team", checkbox = true, desc = "Pirates can see the team of the contractor (Def. 1)"})
+end)
+
 ROLE.color = Color(207, 148, 68, 255) -- ...
 ROLE.dkcolor = Color(207, 148, 68, 255) -- ...
 ROLE.bgcolor = Color(207, 148, 68, 255) -- ...
@@ -21,7 +31,7 @@ ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player
 ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
 ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
 ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = true
+ROLE.preventWin = ttt2_pir_win_alone:GetBool()
 ROLE.avoidTeamIcons = false
 
 ROLE.conVarData = {
@@ -44,6 +54,9 @@ if CLIENT then -- just on client and first init !
 		LANG.AddToLanguage("English", "target_" .. PIRATE.name, "Pirate")
 		LANG.AddToLanguage("English", "ttt2_desc_" .. PIRATE.name, [[The Pirate is a neutral role. He doesn’t really care about what’s good and what’s evil… 
 		all that matters is, that there’s money involved. As long as another person owns the Pirate Captain’s contract, all pirates are on the same team as them.]])
+		LANG.AddToLanguage("English", "hilite_win_" .. TEAM_PIRATE, "PIRATES WON") -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
+		LANG.AddToLanguage("English", "win_" .. TEAM_PIRATE, "The Pirates won! ARRRR") -- teamname
+		LANG.AddToLanguage("English", "ev_win_" .. TEAM_PIRATE, "The Pirates have claimed their gold!")
 
 		---------------------------------
 
@@ -55,6 +68,9 @@ if CLIENT then -- just on client and first init !
 		LANG.AddToLanguage("Deutsch", "target_" .. PIRATE.name, "Pirat")
 		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. PIRATE.name, [[Piraten sind neutral. Sie kümmern sich nicht um gut und böse... das Geld muss stimmen.
 		So lange eine andere Person einen Vertrag mit dem Piraten geschlossen hat, kämpft er für sein Team.]])
+		LANG.AddToLanguage("Deutsch", "hilite_win_" .. TEAM_PIRATE, "PIRATES WON") -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
+		LANG.AddToLanguage("Deutsch", "win_" .. TEAM_PIRATE, "Die Piraten haben gewonnen! ARRRR") -- teamname
+		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_PIRATE, "Die Piraten haben sich ihr Gold geholt!")
 	end)
 else
 	--cleanup

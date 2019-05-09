@@ -64,10 +64,15 @@ function SWEP:MakeContract()
 		end
 	end
 
-	--update pirates team visibility according to his new mates
-	local visibility = roles.GetByIndex(master:GetSubRole()).unknownTeam
-	PIRATE.unknownTeam = visibility
-	PIRATE_CAPTAIN.unknownTeam = visibility
+	if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+		--update pirates team visibility according to his new mates
+		local visibility = roles.GetByIndex(master:GetSubRole()).unknownTeam
+		PIRATE.unknownTeam = visibility
+		PIRATE_CAPTAIN.unknownTeam = visibility
+	else
+		PIRATE_CAPTAIN.unknownTeam = true
+		PIRATE.unknownTeam = true
+	end
 
 	SendFullStateUpdate()
 
@@ -154,15 +159,24 @@ if CLIENT then
 		local ply = LocalPlayer()
 		local master = net.ReadEntity()
 
-		local masterTeamData = TEAMS[master:GetTeam()]	
-		chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," and you are fighting for Team ", masterTeamData.color ,string.upper(master:GetTeam()))
+		if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+			local masterTeamData = TEAMS[master:GetTeam()]	
+			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," and you are fighting for Team ", masterTeamData.color ,string.upper(master:GetTeam()))
+		else
+			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetName(), Color(255, 255, 255))
+		end
+
 		chat.PlaySound()
 	end)
 
 	net.Receive("TTT2PirContractTerminatedPirate", function()
 		local master = net.ReadEntity()
 
-		chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," was terminated with his death.")
+		if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," was terminated with his death.")
+		else
+			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetName(), Color(255, 255, 255)," was terminated with his death.")
+		end
 		chat.PlaySound()
 	end)
 else
