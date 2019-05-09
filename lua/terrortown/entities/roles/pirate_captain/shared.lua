@@ -16,6 +16,7 @@ ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
 ROLE.unknownTeam = true -- player don't know their teammates
 ROLE.preventWin = true
 ROLE.avoidTeamIcons = false
+ROLE.notSelectable = true -- role cant be selected!
 
 ROLE.conVarData = {
 	pct = 1, -- necessary: percentage of getting this role selected (per player)

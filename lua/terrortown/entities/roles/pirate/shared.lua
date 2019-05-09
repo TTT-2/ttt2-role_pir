@@ -58,6 +58,21 @@ if CLIENT then -- just on client and first init !
 	end)
 else
 	--cleanup
+	hook.Add("TTTBeginRound", "TTT2PirAddCaptain", function()
+		local pirs = {}
+		for _, ply in ipairs(player.GetAll()) do
+			if ply:GetBaseRole() == ROLE_PIRATE then
+				table.insert(pirs, ply)
+			end
+		end
+		if #pirs > 0 then
+			local newCap = table.Random(pirs)
+			newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
+			SendFullStateUpdate()
+		end
+	end)
+
+	--cleanup
 	hook.Add("TTTPrepareRound", "TTT2PirPrepRound", function()
 		for _, ply in ipairs(player.GetAll()) do
 			ply.is_pir_master = nil
