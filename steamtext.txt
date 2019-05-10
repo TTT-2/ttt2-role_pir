@@ -1,0 +1,50 @@
+[i]Pew. A bullet hit the person in front of him right to the head. The body of his master fell lifeless to the ground. But he felt nothing, he was paid in advance. Now he needed another fool to fight in his pointless battles.[/i]
+
+You have to use [URL=https://steamcommunity.com/sharedfiles/filedetails/?id=1357204556]TTT2[/URL] in order to use this role. Additionally using [URL=https://steamcommunity.com/sharedfiles/filedetails/?id=1362430347]ULX for TTT2[/URL] is recommended. Report bugs concerning this role [URL=https://github.com/TTT-2/ttt2-role_jes/issues]here[/URL] and submit new role ideas [URL=https://github.com/Alf21/TTT2/issues]here[/URL].
+
+Discord: [url=https://discord.gg/9njYXGY]https://discord.gg/9njYXGY[/url]
+Source: [URL=https://github.com/TTT-2/ttt2-role_pir]https://github.com/TTT-2/ttt2-role_pir[/URL]
+
+
+[img]https://i.imgur.com/KeP4fWN.png[/img]
+
+The Pirate Captain spawns with an item called the ‘Contract’. The Contract doesn’t have any direct abilities. It is, however, what binds the Pirates to another player: If the Captain throws the Contract and it gets picked up by someone, all Pirates are automatically on the same team as this person, their 'master'. The Pirates doesn’t gain the teammate's abilities, but they can follow his orders and basically becomes somewhat of a sidekick
+
+However, since the Contract is what binds the Pirates to his team: When the master dies, the Contract is dropped. Whoever picks it up will be the Pirates new boss.
+But there is another clue: if the Captain dies the Contract gets removed and a new Captain is designated among the Pirates. The new Captain is not bound to the vows his predecessor made and can search for a new master on his own.
+
+[H1]Plays best with:[/H1]
+[list]
+    [*][URL=https://steamcommunity.com/sharedfiles/filedetails/?id=1363049665]Jester[/URL]
+    [*][URL=https://steamcommunity.com/sharedfiles/filedetails/?id=1683708655]Spy[/URL]
+	[*][URL=https://steamcommunity.com/sharedfiles/filedetails/?id=1392362130]Jackal[/URL]
+[/list]
+
+
+[img]https://i.imgur.com/jIBWtbM.png[/img]
+
+Convars are variables that are introduced to allow server owners to customize the gameplay without changing the code. There are always a handful of convars automatically created by TTT2, that define the spawn parameters of this role and are found in ULX. Additionally there might be some role specific convars, which have to be set in the server config file.
+
+[h1]Normal Role Convars (also found in ULX):[/h1]
+[code]# enable or disable this role
+  ttt_pir_enabled [0/1] (default: 1) 
+# the percentage of players that are spawned as Pirate
+  ttt_pir_pct [0.0..1.0] (default: 1.0)
+# the limit of players that spawn as Pirate each round, this overwrites the percentage
+  ttt_pir_max [0..n] (default: 1) 
+# the probability each round of Pirates being spawned at all
+  ttt_pir_random [0..100] (default: 50) 
+# the amount of players needed for Pirates to spawn
+  ttt_pir_min_players: [0..n] (default: 8)[/code]
+
+[h1]Rolespecific Convars:[/h1]
+[code]# decides if the Pirates can win alone without an active contract
+  ttt_pir_win_alone [0/1] (default: 0)[/code]
+
+--
+[h1]Credits:[/h1]
+[URL=https://steamcommunity.com/id/LeBroomer]LeBroomer[/URL]: creator of this role addon
+[URL=https://steamcommunity.com/profiles/76561198007725535]Skatcat[/URL]: for the idea and concept
+[URL=https://steamcommunity.com/id/mineotopia]Mineotopia[/URL]: designer of the role and workshop icon
+
+Additionally credits go to [URL=https://sketchfab.com/FlukierJupiter]FlujierJupiter[/URL] for creating the Contract model. It was ported to source engine and used for the world and view model. The original can be found here: https://sketchfab.com/3d-models/scroll-7450e494eb654e9b937bb52724220e77 and is licensed under the [URL=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0 license[/URL]

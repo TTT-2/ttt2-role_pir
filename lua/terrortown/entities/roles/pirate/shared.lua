@@ -1,24 +1,24 @@
 if SERVER then
 	AddCSLuaFile()
 
-	resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_spy.vmt")
+	resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_pir.vmt")
 end
 
 -- creates global var "TEAM_PIRATE" and other required things
 -- TEAM_[name], data: e.g. icon, color,...
-roles.InitCustomTeam(ROLE.name, { -- this creates var "TEAM_JESTER"
-		icon = "vgui/ttt/dynamic/roles/icon_spy",
+roles.InitCustomTeam(ROLE.name, { -- this creates var "TEAM_PIRATE"
+		icon = "vgui/ttt/dynamic/roles/icon_pir",
 		color = Color(207, 148, 68, 255)
 })
 
-local ttt2_pir_win_alone = CreateConVar("ttt2_pir_win_alone", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
-local ttt2_pir_see_contractor_team = CreateConVar("ttt2_pir_see_contractor_team", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local ttt_pir_win_alone = CreateConVar("ttt_pir_win_alone", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local ttt_pir_see_contractor_team = CreateConVar("ttt_pir_see_contractor_team", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 
 hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicPirCVars", function(tbl)
 	tbl[ROLE_PIRATE] = tbl[ROLE_PIRATE] or {}
 
-	table.insert(tbl[ROLE_PIRATE], {cvar = "ttt2_pir_win_alone", checkbox = true, desc = "Pirates can win as team if they have no live contract (Def. 0)"})
-	--table.insert(tbl[ROLE_PIRATE], {cvar = "ttt2_pir_see_contractor_team", checkbox = true, desc = "Pirates can see the team of the contractor (Def. 1)"})
+	table.insert(tbl[ROLE_PIRATE], {cvar = "ttt_pir_win_alone", checkbox = true, desc = "Pirates can win as team if they have no live contract (Def. 0)"})
+	--table.insert(tbl[ROLE_PIRATE], {cvar = "ttt_pir_see_contractor_team", checkbox = true, desc = "Pirates can see the team of the contractor (Def. 1)"})
 end)
 
 ROLE.color = Color(207, 148, 68, 255) -- ...
@@ -31,7 +31,7 @@ ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player
 ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
 ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
 ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = ttt2_pir_win_alone:GetBool()
+ROLE.preventWin = ttt_pir_win_alone:GetBool()
 ROLE.avoidTeamIcons = false
 
 ROLE.conVarData = {
@@ -84,6 +84,7 @@ else
 		if #pirs > 0 then
 			local newCap = table.Random(pirs)
 			newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
+			newCap:SetDefaultCredits()
 			SendFullStateUpdate()
 		end
 	end)

@@ -64,7 +64,7 @@ function SWEP:MakeContract()
 		end
 	end
 
-	if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+	if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
 		--update pirates team visibility according to his new mates
 		local visibility = roles.GetByIndex(master:GetSubRole()).unknownTeam
 		PIRATE.unknownTeam = visibility
@@ -159,7 +159,7 @@ if CLIENT then
 		local ply = LocalPlayer()
 		local master = net.ReadEntity()
 
-		if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+		if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
 			local masterTeamData = TEAMS[master:GetTeam()]	
 			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," and you are fighting for Team ", masterTeamData.color ,string.upper(master:GetTeam()))
 		else
@@ -172,7 +172,7 @@ if CLIENT then
 	net.Receive("TTT2PirContractTerminatedPirate", function()
 		local master = net.ReadEntity()
 
-		if GetConVar("ttt2_pir_see_contractor_team"):GetBool() then
+		if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
 			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," was terminated with his death.")
 		else
 			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetName(), Color(255, 255, 255)," was terminated with his death.")
@@ -216,6 +216,7 @@ else
 		if #otherPir > 0 then
 			local newCap = table.Random(otherPir)
 			newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
+			newCap:SetDefaultCredits()
 		end
 
 		SendFullStateUpdate()
