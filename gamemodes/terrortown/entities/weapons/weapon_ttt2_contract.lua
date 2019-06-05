@@ -86,6 +86,9 @@ function SWEP:MakeContract()
 	net.WriteEntity(master)
 	net.Send(pirate)
 
+	--status symbol
+	STATUS:AddStatus(master, "ttt2_pirate_contract")
+
 	for _, ply in ipairs(player.GetAll()) do
 		if ply:GetSubRole() == ROLE_PIRATE then
 			net.Start("TTT2PirContractPirate")
@@ -114,7 +117,8 @@ function SWEP:OnDrop()
 			self.OrigOwner:Give("weapon_ttt2_contract")
 		end
 	end)
-
+		
+	self.AllowDrop = false
 	if self.OrigOwner == self.Owner then
 		return true
 	else
@@ -135,12 +139,21 @@ function SWEP:Equip()
 	--another player equipped
 	if self.OrigOwner ~= self.Owner then
 		self:MakeContract()
+	else
+		self.AllowDrop = true
 	end
 end
 
 
 --hooks and messages
 if CLIENT then
+	hook.Add("Initialize", "ttt_pirate_contract init", function() 
+		STATUS:RegisterStatus("ttt2_pirate_contract", {
+			hud = Material("vgui/ttt/hud_icon_pirate.png"),
+			type = "good"
+		})
+	end)
+	
 	net.Receive("TTT2PirContractMaster", function()
 		local pirate = net.ReadEntity()
 
