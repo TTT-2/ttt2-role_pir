@@ -31,7 +31,7 @@ ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player
 ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
 ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
 ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = ttt_pir_win_alone:GetBool()
+ROLE.preventWin = not ttt_pir_win_alone:GetBool()
 ROLE.avoidTeamIcons = false
 
 ROLE.conVarData = {
