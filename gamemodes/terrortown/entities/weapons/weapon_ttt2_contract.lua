@@ -139,6 +139,7 @@ function SWEP:Equip()
 	--another player equipped
 	if self.OrigOwner ~= self.Owner then
 		self:MakeContract()
+		self.AllowDrop = false
 	else
 		self.AllowDrop = true
 	end
