@@ -89,6 +89,27 @@ else
 		end
 	end)
 
+	hook.Add("TTT2UpdateTeam", "TTT2PirAddCaptainDuringRound", function(ply, oldteam, team)
+		if team == TEAM_PIRATE then
+			local pirs = {}
+			for _, ply in ipairs(player.GetAll()) do
+				if ply:GetBaseRole() == ROLE_PIRATE and ply:Alive() then
+					table.insert(pirs, ply)
+				end
+
+				if ply:GetSubRole() == ROLE_PIRATE_CAPTAIN and ply:Alive() then
+					return
+				end
+			end
+			if #pirs > 0 then
+				local newCap = table.Random(pirs)
+				newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
+				newCap:SetDefaultCredits()
+				SendFullStateUpdate()
+			end
+		end
+	end)
+
 	--cleanup
 	hook.Add("TTTPrepareRound", "TTT2PirPrepRound", function()
 		for _, ply in ipairs(player.GetAll()) do
