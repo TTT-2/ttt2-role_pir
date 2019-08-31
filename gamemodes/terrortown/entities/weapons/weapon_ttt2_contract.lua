@@ -74,6 +74,10 @@ function SWEP:MakeContract()
 		PIRATE.unknownTeam = true
 	end
 
+	local preventWinState = roles.GetByIndex(master:GetSubRole()).preventWin
+	PIRATE.preventWin = preventWinState
+	PIRATE_CAPTAIN.preventWin = preventWinState
+
 	SendFullStateUpdate()
 
 	--send a message to the new contract owner
@@ -193,6 +197,13 @@ if CLIENT then
 		else
 			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetName(), Color(255, 255, 255)," was terminated with his death.")
 		end
+
+		PIRATE.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+		PIRATE_CAPTAIN.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+
+		PIRATE.unknownTeam = false
+		PIRATE_CAPTAIN.unknownTeam = false
+
 		chat.PlaySound()
 	end)
 else
@@ -249,6 +260,12 @@ else
 				ply:UpdateTeam(TEAM_PIRATE)
 			end
 		end
+
+		PIRATE.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+		PIRATE_CAPTAIN.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+		PIRATE.unknownTeam = false
+		PIRATE_CAPTAIN.unknownTeam = false
+
 		SendFullStateUpdate()
 
 		master.is_pir_master = false
