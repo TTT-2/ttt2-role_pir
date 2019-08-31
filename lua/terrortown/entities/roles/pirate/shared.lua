@@ -21,6 +21,11 @@ hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicPirCVars", function(tbl)
 	--table.insert(tbl[ROLE_PIRATE], {cvar = "ttt_pir_see_contractor_team", checkbox = true, desc = "Pirates can see the team of the contractor (Def. 1)"})
 end)
 
+cvars.AddChangeCallback(ttt_pir_win_alone:GetName(), function(name, old, new)
+	PIRATE.preventWin = not ttt_pir_win_alone:GetBool()
+	PIRATE_CAPTAIN.preventWin = not ttt_pir_win_alone:GetBool()
+end, "TTT2PirWinAloneCallback")
+
 ROLE.color = Color(207, 148, 68, 255) -- ...
 ROLE.dkcolor = Color(207, 148, 68, 255) -- ...
 ROLE.bgcolor = Color(207, 148, 68, 255) -- ...
