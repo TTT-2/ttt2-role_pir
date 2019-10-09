@@ -26,30 +26,32 @@ cvars.AddChangeCallback(ttt_pir_win_alone:GetName(), function(name, old, new)
 	PIRATE_CAPTAIN.preventWin = not ttt_pir_win_alone:GetBool()
 end, "TTT2PirWinAloneCallback")
 
-ROLE.color = Color(207, 148, 68, 255) -- ...
-ROLE.dkcolor = Color(207, 148, 68, 255) -- ...
-ROLE.bgcolor = Color(207, 148, 68, 255) -- ...
-ROLE.abbr = "pir" -- abbreviation
-ROLE.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
-ROLE.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
-ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
-ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
-ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = not ttt_pir_win_alone:GetBool()
-ROLE.avoidTeamIcons = false
+function ROLE:PreInitialize()
+	self.color = Color(207, 148, 68, 255) -- ...
+	self.dkcolor = Color(207, 148, 68, 255) -- ...
+	self.bgcolor = Color(207, 148, 68, 255) -- ...
+	self.abbr = "pir" -- abbreviation
+	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
+	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
+	self.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
+	self.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
+	self.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
+	self.unknownTeam = true -- player don't know their teammates
+	self.preventWin = not ttt_pir_win_alone:GetBool()
+	self.avoidTeamIcons = false
 
-ROLE.conVarData = {
-	pct = 0.17, -- necessary: percentage of getting this role selected (per player)
-	maximum = 1, -- maximum amount of roles in a round
-	random = 50,
-	minPlayers = 7, -- minimum amount of players until this role is able to get selected
-	togglable = true, -- option to toggle a role for a client if possible (F1 menu)
-}
+	self.conVarData = {
+		pct = 0.17, -- necessary: percentage of getting this role selected (per player)
+		maximum = 1, -- maximum amount of roles in a round
+		random = 50,
+		minPlayers = 7, -- minimum amount of players until this role is able to get selected
+		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
+	}
+end
 
-if CLIENT then -- just on client and first init !
-	-- if sync of roles has finished
-	hook.Add("TTT2FinishedLoading", "PirInitT", function()
+function ROLE:Initialize()
+	if CLIENT then
+		-- Role specific language elements
 		-- setup here is not necessary but if you want to access the role data, you need to start here
 		-- setup basic translation !
 		LANG.AddToLanguage("English", PIRATE.name, "Pirate")
@@ -76,8 +78,10 @@ if CLIENT then -- just on client and first init !
 		LANG.AddToLanguage("Deutsch", "hilite_win_" .. TEAM_PIRATE, "PIRATES WON") -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
 		LANG.AddToLanguage("Deutsch", "win_" .. TEAM_PIRATE, "Die Piraten haben gewonnen! ARRRR") -- teamname
 		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_PIRATE, "Die Piraten haben sich ihr Gold geholt!")
-	end)
-else
+	end
+end
+
+if SERVER then
 	--cleanup
 	hook.Add("TTTBeginRound", "TTT2PirAddCaptain", function()
 		local pirs = {}

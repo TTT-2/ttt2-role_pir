@@ -4,35 +4,32 @@ if SERVER then
 	resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_cap.vmt")
 end
 
-ROLE.color = Color(136, 81, 50, 255) -- ...
-ROLE.dkcolor = Color(136, 81, 50, 255) -- ...
-ROLE.bgcolor = Color(136, 81, 50, 255) -- ...
-ROLE.abbr = "cap" -- abbreviation
-ROLE.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
-ROLE.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-ROLE.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
-ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
-ROLE.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
-ROLE.unknownTeam = true -- player don't know their teammates
-ROLE.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
-ROLE.avoidTeamIcons = false
-ROLE.notSelectable = true -- role cant be selected!
+function ROLE:PreInitialize()
+	self.color = Color(136, 81, 50, 255) -- ...
+	self.dkcolor = Color(136, 81, 50, 255) -- ...
+	self.bgcolor = Color(136, 81, 50, 255) -- ...
+	self.abbr = "cap" -- abbreviation
+	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
+	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
+	self.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
+	self.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
+	self.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
+	self.unknownTeam = true -- player don't know their teammates
+	self.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+	self.avoidTeamIcons = false
+	self.notSelectable = true -- role cant be selected!
 
-ROLE.conVarData = {
-	credits = 0, -- the starting credits of a specific role
-	shopFallback = SHOP_DISABLED
-}
+	self.conVarData = {
+		credits = 0, -- the starting credits of a specific role
+		shopFallback = SHOP_DISABLED
+	}
+end
 
--- now link this subrole with its baserole
-hook.Add("TTT2BaseRoleInit", "TTT2ConBRPirWithCap", function()
-	PIRATE_CAPTAIN:SetBaseRole(ROLE_PIRATE)
-end)
-
-if CLIENT then -- just on client and first init !
-	-- if sync of roles has finished
-	hook.Add("TTT2FinishedLoading", "PirCapInitT", function()
-		-- setup here is not necessary but if you want to access the role data, you need to start here
-		-- setup basic translation !
+function ROLE:Initialize()
+	roles.SetBaseRole(self, ROLE_PIRATE)
+	
+	if CLIENT then
+		-- Role specific language elements
 		LANG.AddToLanguage("English", PIRATE_CAPTAIN.name, "Pirate Captain")
 		LANG.AddToLanguage("English", "info_popup_" .. PIRATE_CAPTAIN.name, [[You ARRR a Pirate Captain! Search someone to fight for - earn gold and points.]])
 		LANG.AddToLanguage("English", "body_found_" .. PIRATE_CAPTAIN.abbr, "This was an Pirate Captain...")
@@ -51,7 +48,5 @@ if CLIENT then -- just on client and first init !
 		LANG.AddToLanguage("Deutsch", "target_" .. PIRATE_CAPTAIN.name, "Piraten Kapitän")
 		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[ Der Piraten Kapitän ist neutral. Er kümmert sich nicht um gut und böse... das Geld muss stimmen.
 		So lange eine andere Person einen Vertrag mit dem Piraten Kapitän geschlossen hat, kämpfen alle Piraten für sein Team.]])
-	end)
-else
-
+	end
 end
