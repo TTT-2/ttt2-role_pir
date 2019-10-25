@@ -213,42 +213,6 @@ else
 		end
 	end )
 
-	hook.Add( "PostPlayerDeath", "TTT2PirHandleCaptainDeath", function(ply)
-		if ply:GetSubRole() ~= ROLE_PIRATE_CAPTAIN or not IsValid(ply.pir_contract) then
-			return
-		end
-
-		local contract = ply.pir_contract
-		local master = contract:GetOwner()
-		if IsValid(master) then
-			net.Start("TTT2PirContractTerminatedMaster")
-			net.WriteEntity(ply)
-			net.Send(master)
-			master.is_pir_master = false
-			ply.pirate_master = nil
-		end
-		contract:Remove()
-
-		local otherPir = {}
-		for _, pir in ipairs(player.GetAll()) do
-			if pir:GetBaseRole() == ROLE_PIRATE then
-				pir:UpdateTeam(TEAM_PIRATE)
-
-				if pir:Alive()  then
-					table.insert(otherPir,pir)
-				end
-			end
-		end
-
-		if #otherPir > 0 then
-			local newCap = table.Random(otherPir)
-			newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
-			newCap:SetDefaultCredits()
-		end
-
-		SendFullStateUpdate()
-	end)
-
 	hook.Add( "PostPlayerDeath", "TTT2PirHandleMastersDeath", function(master)
 		if not master.is_pir_master then return end
 		

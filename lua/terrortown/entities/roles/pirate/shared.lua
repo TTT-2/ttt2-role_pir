@@ -26,6 +26,25 @@ cvars.AddChangeCallback(ttt_pir_win_alone:GetName(), function(name, old, new)
 	PIRATE_CAPTAIN.preventWin = not ttt_pir_win_alone:GetBool()
 end, "TTT2PirWinAloneCallback")
 
+function ChooseNewCaptain()
+	local pirs = {}
+	for _, ply in ipairs(player.GetAll()) do
+		if ply:GetSubRole() == ROLE_PIRATE_CAPTAIN and ply:Alive() then
+			return
+		end
+		if ply:GetSubRole() == ROLE_PIRATE then
+			table.insert(pirs, ply)
+		end
+	end
+
+	if #pirs > 0 then
+		local newCap = table.Random(pirs)
+		newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
+		newCap:SetDefaultCredits()
+		SendFullStateUpdate()
+	end
+end
+
 function ROLE:PreInitialize()
 	self.color = Color(207, 148, 68, 255) -- ...
 	self.dkcolor = Color(207, 148, 68, 255) -- ...
@@ -81,45 +100,11 @@ function ROLE:Initialize()
 	end
 end
 
+function ROLE:GiveRoleLoadout(ply, isRoleChange)
+	ChooseNewCaptain()
+end
+
 if SERVER then
-	--cleanup
-	hook.Add("TTTBeginRound", "TTT2PirAddCaptain", function()
-		local pirs = {}
-		for _, ply in ipairs(player.GetAll()) do
-			if ply:GetBaseRole() == ROLE_PIRATE then
-				table.insert(pirs, ply)
-			end
-		end
-		if #pirs > 0 then
-			local newCap = table.Random(pirs)
-			newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
-			newCap:SetDefaultCredits()
-			SendFullStateUpdate()
-		end
-	end)
-
-	hook.Add("TTT2UpdateTeam", "TTT2PirAddCaptainDuringRound", function(ply, oldteam, team)
-		if team == TEAM_PIRATE then
-			local pirs = {}
-			for _, ply in ipairs(player.GetAll()) do
-				if ply:GetBaseRole() == ROLE_PIRATE and ply:Alive() then
-					table.insert(pirs, ply)
-				end
-
-				if ply:GetSubRole() == ROLE_PIRATE_CAPTAIN and ply:Alive() then
-					return
-				end
-			end
-			if #pirs > 0 then
-				local newCap = table.Random(pirs)
-				newCap:SetRole(ROLE_PIRATE_CAPTAIN, TEAM_PIRATE)
-				newCap:SetDefaultCredits()
-				SendFullStateUpdate()
-			end
-		end
-	end)
-
-	--cleanup
 	hook.Add("TTTPrepareRound", "TTT2PirPrepRound", function()
 		for _, ply in ipairs(player.GetAll()) do
 			ply.is_pir_master = nil

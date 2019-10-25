@@ -50,3 +50,42 @@ function ROLE:Initialize()
 		So lange eine andere Person einen Vertrag mit dem Piraten Kapitän geschlossen hat, kämpfen alle Piraten für sein Team.]])
 	end
 end
+
+function ROLE:GiveRoleLoadout(ply, isRoleChange)
+	if not isRoleChange then
+		ply:SetRole(ROLE_PIRATE, TEAM_PIRATE)
+		SendFullStateUpdate()
+	end
+end
+
+function ROLE:RemoveRoleLoadout(ply, isRoleChange)
+	if not IsValid(ply.pir_contract) then
+		return
+	end
+
+	local contract = ply.pir_contract
+	local master = contract:GetOwner()
+	if IsValid(master) then
+		net.Start("TTT2PirContractTerminatedMaster")
+		net.WriteEntity(ply)
+		net.Send(master)
+		master.is_pir_master = false
+		ply.pirate_master = nil
+	end
+	contract:Remove()
+
+	for _, pir in ipairs(player.GetAll()) do
+		if pir:GetBaseRole() == ROLE_PIRATE then
+			pir:UpdateTeam(TEAM_PIRATE)
+		end
+	end
+
+	PIRATE.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+	PIRATE_CAPTAIN.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
+	PIRATE.unknownTeam = false
+	PIRATE_CAPTAIN.unknownTeam = false
+	
+	SendFullStateUpdate()
+
+	ChooseNewCaptain()
+end
