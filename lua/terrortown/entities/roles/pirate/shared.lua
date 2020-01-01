@@ -46,9 +46,8 @@ function ChooseNewCaptain()
 end
 
 function ROLE:PreInitialize()
-	self.color = Color(207, 148, 68, 255) -- ...
-	self.dkcolor = Color(207, 148, 68, 255) -- ...
-	self.bgcolor = Color(207, 148, 68, 255) -- ...
+	self.color = Color(207, 148, 68, 255)
+
 	self.abbr = "pir" -- abbreviation
 	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
 	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
@@ -71,8 +70,6 @@ end
 function ROLE:Initialize()
 	if CLIENT then
 		-- Role specific language elements
-		-- setup here is not necessary but if you want to access the role data, you need to start here
-		-- setup basic translation !
 		LANG.AddToLanguage("English", PIRATE.name, "Pirate")
 		LANG.AddToLanguage("English", "info_popup_" .. PIRATE.name, [[You ARRR a Pirate! Search someone to fight for - earn gold and points.]])
 		LANG.AddToLanguage("English", "body_found_" .. PIRATE.abbr, "This was an Pirate...")
@@ -84,9 +81,6 @@ function ROLE:Initialize()
 		LANG.AddToLanguage("English", "win_" .. TEAM_PIRATE, "The Pirates won! ARRRR") -- teamname
 		LANG.AddToLanguage("English", "ev_win_" .. TEAM_PIRATE, "The Pirates have claimed their gold!")
 
-		---------------------------------
-
-		-- maybe this language as well...
 		LANG.AddToLanguage("Deutsch", PIRATE.name, "Pirat")
 		LANG.AddToLanguage("Deutsch", "info_popup_" .. PIRATE.name, [[Du bist ein Pirat! Tu dich mit jemandem zusammen und kämpfe für Gold und Punkte.]])
 		LANG.AddToLanguage("Deutsch", "body_found_" .. PIRATE.abbr, "Er war ein Pirat...")
@@ -123,4 +117,4 @@ if SERVER then
 			end
 		end
 	end)
-end	
+end

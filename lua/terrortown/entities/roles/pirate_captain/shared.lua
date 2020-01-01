@@ -5,9 +5,8 @@ if SERVER then
 end
 
 function ROLE:PreInitialize()
-	self.color = Color(136, 81, 50, 255) -- ...
-	self.dkcolor = Color(136, 81, 50, 255) -- ...
-	self.bgcolor = Color(136, 81, 50, 255) -- ...
+	self.color = Color(136, 81, 50, 255)
+
 	self.abbr = "cap" -- abbreviation
 	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
 	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
@@ -27,7 +26,7 @@ end
 
 function ROLE:Initialize()
 	roles.SetBaseRole(self, ROLE_PIRATE)
-	
+
 	if CLIENT then
 		-- Role specific language elements
 		LANG.AddToLanguage("English", PIRATE_CAPTAIN.name, "Pirate Captain")
@@ -38,9 +37,6 @@ function ROLE:Initialize()
 		LANG.AddToLanguage("English", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[The Pirate Captain is a neutral role. He doesn’t really care about what’s good and what’s evil… 
 		all that matters is, that there’s money involved. As long as another person owns the Pirate Captain’s contract, all pirates are on the same team as them.]])
 
-		---------------------------------
-
-		-- maybe this language as well...
 		LANG.AddToLanguage("Deutsch", PIRATE_CAPTAIN.name, "Piraten Kapitän")
 		LANG.AddToLanguage("Deutsch", "info_popup_" .. PIRATE_CAPTAIN.name, [[Du bist ein Piraten Kapitän! Tu dich mit jemandem zusammen und kämpfe für Gold und Punkte.]])
 		LANG.AddToLanguage("Deutsch", "body_found_" .. PIRATE_CAPTAIN.abbr, "Er war ein Piraten Kapitän...")
@@ -84,7 +80,7 @@ function ROLE:RemoveRoleLoadout(ply, isRoleChange)
 	PIRATE_CAPTAIN.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
 	PIRATE.unknownTeam = false
 	PIRATE_CAPTAIN.unknownTeam = false
-	
+
 	SendFullStateUpdate()
 
 	ChooseNewCaptain()

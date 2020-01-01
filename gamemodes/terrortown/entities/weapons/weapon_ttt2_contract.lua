@@ -48,10 +48,10 @@ function SWEP:MakeContract()
 	local pirate = self.OrigOwner
 	local master = self.Owner
 
-	if not IsValid(pirate) or not IsValid(master) then 
+	if not IsValid(pirate) or not IsValid(master) then
 		return
 	end
-	
+
 	master.is_pir_master = true
 
 	--change the team of the pirate captain and his crew
@@ -121,7 +121,7 @@ function SWEP:OnDrop()
 			self.OrigOwner:Give("weapon_ttt2_contract")
 		end
 	end)
-		
+
 	self.AllowDrop = false
 	if self.OrigOwner == self.Owner then
 		return true
@@ -152,17 +152,17 @@ end
 
 --hooks and messages
 if CLIENT then
-	hook.Add("Initialize", "ttt_pirate_contract init", function() 
+	hook.Add("Initialize", "ttt_pirate_contract init", function()
 		STATUS:RegisterStatus("ttt2_pirate_contract", {
 			hud = Material("vgui/ttt/hud_icon_pirate.png"),
 			type = "good"
 		})
 	end)
-	
+
 	net.Receive("TTT2PirContractMaster", function()
 		local pirate = net.ReadEntity()
 
-		chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"The pirate captain ", pirate:GetRoleColor(), pirate:GetName(), Color(255, 255, 255)," and his crew is now fighting for you.")
+		chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "The pirate captain ", pirate:GetRoleColor(), pirate:GetName(), Color(255, 255, 255), " and his crew is now fighting for you.")
 		chat.PlaySound()
 	end)
 
@@ -171,19 +171,18 @@ if CLIENT then
 
 		STATUS:RemoveStatus(LocalPlayer(), "ttt2_pirate_contract")
 
-		chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", pirate:GetRoleColor(), pirate:GetName(), Color(255, 255, 255)," was terminated with his death.")
+		chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your contract with ", pirate:GetRoleColor(), pirate:GetName(), Color(255, 255, 255), " was terminated with his death.")
 		chat.PlaySound()
 	end)
 
 	net.Receive("TTT2PirContractPirate", function()
-		local ply = LocalPlayer()
 		local master = net.ReadEntity()
 
 		if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
-			local masterTeamData = TEAMS[master:GetTeam()]	
-			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," and you are fighting for Team ", masterTeamData.color ,string.upper(master:GetTeam()))
+			local masterTeamData = TEAMS[master:GetTeam()]
+			chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255), " and you are fighting for Team ", masterTeamData.color , string.upper(master:GetTeam()))
 		else
-			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your new master is ", master:GetName(), Color(255, 255, 255))
+			chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your new master is ", master:GetName(), Color(255, 255, 255))
 		end
 
 		chat.PlaySound()
@@ -208,14 +207,14 @@ if CLIENT then
 	end)
 else
 	hook.Add( "PlayerCanPickupWeapon", "TTT2PirNoContractPickup", function( ply, wep )
-		if wep:GetClass() == "weapon_ttt2_contract" and ply:GetBaseRole() == ROLE_PIRATE and IsValid(wep.OrigOwner) and wep.OrigOwner ~= ply then 
-			return false 
+		if wep:GetClass() == "weapon_ttt2_contract" and ply:GetBaseRole() == ROLE_PIRATE and IsValid(wep.OrigOwner) and wep.OrigOwner ~= ply then
+			return false
 		end
 	end )
 
 	hook.Add( "PostPlayerDeath", "TTT2PirHandleMastersDeath", function(master)
 		if not master.is_pir_master then return end
-		
+
 		for _, ply in ipairs(player.GetAll()) do
 			if ply:GetBaseRole() == ROLE_PIRATE then
 				net.Start("TTT2PirContractTerminatedPirate")
