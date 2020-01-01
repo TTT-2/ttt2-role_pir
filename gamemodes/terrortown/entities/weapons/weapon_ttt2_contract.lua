@@ -169,7 +169,7 @@ if CLIENT then
 	net.Receive("TTT2PirContractTerminatedMaster", function()
 		local pirate = net.ReadEntity()
 
-		STATUS:RemoveStatus(LocalPlayer(), "ttt2_pirate_contract")
+		STATUS:RemoveStatus("ttt2_pirate_contract")
 
 		chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your contract with ", pirate:GetRoleColor(), pirate:GetName(), Color(255, 255, 255), " was terminated with his death.")
 		chat.PlaySound()
