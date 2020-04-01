@@ -36,6 +36,14 @@ function ROLE:Initialize()
 		LANG.AddToLanguage("English", "target_" .. PIRATE_CAPTAIN.name, "Pirate Captain")
 		LANG.AddToLanguage("English", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[The Pirate Captain is a neutral role. He doesn’t really care about what’s good and what’s evil… 
 		all that matters is, that there’s money involved. As long as another person owns the Pirate Captain’s contract, all pirates are on the same team as them.]])
+		
+		LANG.AddToLanguage("Italian", PIRATE_CAPTAIN.name, "Capo Pirata")
+		LANG.AddToLanguage("Italian", "info_popup_" .. PIRATE_CAPTAIN.name, [[Tu sei un Capo Pirata! Cerca qualcuno per cui combattere - guadagna oro e punti.]])
+		LANG.AddToLanguage("Italian", "body_found_" .. PIRATE_CAPTAIN.abbr, "Era un Capo Pirata...")
+		LANG.AddToLanguage("Italian", "search_role_" .. PIRATE.abbr, "Questa persona era un Capo Pirata!")
+		LANG.AddToLanguage("Italian", "target_" .. PIRATE_CAPTAIN.name, "Capo Pirata")
+		LANG.AddToLanguage("Italian", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[Il Capo Pirata è un ruolo neutrale. Non gli interessa tanto chi è buono o cattivo… 
+		tutto quello che conta è, che ci siano dei soldi. Finché un'altra persona ha il contratto del Capo Pirata, tutti i pirati sono nella sua stessa squadra.]])
 
 		LANG.AddToLanguage("Deutsch", PIRATE_CAPTAIN.name, "Piraten Kapitän")
 		LANG.AddToLanguage("Deutsch", "info_popup_" .. PIRATE_CAPTAIN.name, [[Du bist ein Piraten Kapitän! Tu dich mit jemandem zusammen und kämpfe für Gold und Punkte.]])
