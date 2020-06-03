@@ -177,10 +177,10 @@ if CLIENT then
 
 	net.Receive("TTT2PirContractPirate", function()
 		local master = net.ReadEntity()
+		local masterTeamData = TEAMS[master:GetTeam()]
 
-		if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
-			local masterTeamData = TEAMS[master:GetTeam()]
-			chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your new master is ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255), " and you are fighting for Team ", masterTeamData.color , string.upper(master:GetTeam()))
+		if GetConVar("ttt_pir_see_contractor_team"):GetBool() and masterTeamData then
+			chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your new master is " .. master:GetName() .. " and you are fighting for Team ", masterTeamData.color , string.upper(master:GetTeam()))
 		else
 			chat.AddText(Color(255, 0, 0), "TTT2 Pirate: ", Color(255, 255, 255), "Your new master is ", master:GetName(), Color(255, 255, 255))
 		end
@@ -192,7 +192,7 @@ if CLIENT then
 		local master = net.ReadEntity()
 
 		if GetConVar("ttt_pir_see_contractor_team"):GetBool() then
-			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetRoleColor(), master:GetName(), Color(255, 255, 255)," was terminated with his death.")
+			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with " .. master:GetName() .. " was terminated with his death.")
 		else
 			chat.AddText(Color(255, 0, 0),"TTT2 Pirate: ",Color(255, 255, 255),"Your contract with ", master:GetName(), Color(255, 255, 255)," was terminated with his death.")
 		end
