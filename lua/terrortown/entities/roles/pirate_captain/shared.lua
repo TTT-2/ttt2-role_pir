@@ -26,25 +26,6 @@ end
 
 function ROLE:Initialize()
 	roles.SetBaseRole(self, ROLE_PIRATE)
-
-	if CLIENT then
-		-- Role specific language elements
-		LANG.AddToLanguage("English", PIRATE_CAPTAIN.name, "Pirate Captain")
-		LANG.AddToLanguage("English", "info_popup_" .. PIRATE_CAPTAIN.name, [[You ARRR a Pirate Captain! Search someone to fight for - earn gold and points.]])
-		LANG.AddToLanguage("English", "body_found_" .. PIRATE_CAPTAIN.abbr, "This was an Pirate Captain...")
-		LANG.AddToLanguage("English", "search_role_" .. PIRATE_CAPTAIN.abbr, "This person was an Pirate Captain!")
-		LANG.AddToLanguage("English", "target_" .. PIRATE_CAPTAIN.name, "Pirate Captain")
-		LANG.AddToLanguage("English", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[The Pirate Captain is a neutral role. He doesn’t really care about what’s good and what’s evil… 
-		all that matters is, that there’s money involved. As long as another person owns the Pirate Captain’s contract, all pirates are on the same team as them.]])
-
-		LANG.AddToLanguage("Deutsch", PIRATE_CAPTAIN.name, "Piraten Kapitän")
-		LANG.AddToLanguage("Deutsch", "info_popup_" .. PIRATE_CAPTAIN.name, [[Du bist ein Piraten Kapitän! Tu dich mit jemandem zusammen und kämpfe für Gold und Punkte.]])
-		LANG.AddToLanguage("Deutsch", "body_found_" .. PIRATE_CAPTAIN.abbr, "Er war ein Piraten Kapitän...")
-		LANG.AddToLanguage("Deutsch", "search_role_" .. PIRATE_CAPTAIN.abbr, "Diese Person war ein Piraten Kapitän!")
-		LANG.AddToLanguage("Deutsch", "target_" .. PIRATE_CAPTAIN.name, "Piraten Kapitän")
-		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. PIRATE_CAPTAIN.name, [[ Der Piraten Kapitän ist neutral. Er kümmert sich nicht um gut und böse... das Geld muss stimmen.
-		So lange eine andere Person einen Vertrag mit dem Piraten Kapitän geschlossen hat, kämpfen alle Piraten für sein Team.]])
-	end
 end
 
 function ROLE:GiveRoleLoadout(ply, isRoleChange)

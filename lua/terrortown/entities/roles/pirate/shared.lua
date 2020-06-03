@@ -67,33 +67,6 @@ function ROLE:PreInitialize()
 	}
 end
 
-function ROLE:Initialize()
-	if CLIENT then
-		-- Role specific language elements
-		LANG.AddToLanguage("English", PIRATE.name, "Pirate")
-		LANG.AddToLanguage("English", "info_popup_" .. PIRATE.name, [[You ARRR a Pirate! Search someone to fight for - earn gold and points.]])
-		LANG.AddToLanguage("English", "body_found_" .. PIRATE.abbr, "This was an Pirate...")
-		LANG.AddToLanguage("English", "search_role_" .. PIRATE.abbr, "This person was an Pirate!")
-		LANG.AddToLanguage("English", "target_" .. PIRATE.name, "Pirate")
-		LANG.AddToLanguage("English", "ttt2_desc_" .. PIRATE.name, [[The Pirate is a neutral role. He doesn’t really care about what’s good and what’s evil… 
-		all that matters is, that there’s money involved. As long as another person owns the Pirate Captain’s contract, all pirates are on the same team as them.]])
-		LANG.AddToLanguage("English", "hilite_win_" .. TEAM_PIRATE, "PIRATES WON") -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
-		LANG.AddToLanguage("English", "win_" .. TEAM_PIRATE, "The Pirates won! ARRRR") -- teamname
-		LANG.AddToLanguage("English", "ev_win_" .. TEAM_PIRATE, "The Pirates have claimed their gold!")
-
-		LANG.AddToLanguage("Deutsch", PIRATE.name, "Pirat")
-		LANG.AddToLanguage("Deutsch", "info_popup_" .. PIRATE.name, [[Du bist ein Pirat! Tu dich mit jemandem zusammen und kämpfe für Gold und Punkte.]])
-		LANG.AddToLanguage("Deutsch", "body_found_" .. PIRATE.abbr, "Er war ein Pirat...")
-		LANG.AddToLanguage("Deutsch", "search_role_" .. PIRATE.abbr, "Diese Person war ein Pirat!")
-		LANG.AddToLanguage("Deutsch", "target_" .. PIRATE.name, "Pirat")
-		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. PIRATE.name, [[Piraten sind neutral. Sie kümmern sich nicht um gut und böse... das Geld muss stimmen.
-		So lange eine andere Person einen Vertrag mit dem Piraten geschlossen hat, kämpft er für sein Team.]])
-		LANG.AddToLanguage("Deutsch", "hilite_win_" .. TEAM_PIRATE, "PIRATES WON") -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
-		LANG.AddToLanguage("Deutsch", "win_" .. TEAM_PIRATE, "Die Piraten haben gewonnen! ARRRR") -- teamname
-		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_PIRATE, "Die Piraten haben sich ihr Gold geholt!")
-	end
-end
-
 function ROLE:GiveRoleLoadout(ply, isRoleChange)
 	ChooseNewCaptain()
 end
