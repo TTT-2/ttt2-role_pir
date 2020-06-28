@@ -44,6 +44,12 @@ SWEP.Weight = 5
 
 SWEP.notBuyable = true
 
+function SWEP:Initialize()
+	if CLIENT then
+		self:AddTTT2HUDHelp("Drop the contract for someone")
+	end
+end
+
 function SWEP:MakeContract()
 	local pirate = self.OrigOwner
 	local master = self.Owner
