@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("spanish")
+L = LANG.GetLanguageTableReference("Español")
 
 L[PIRATE.name] = "Pirata"
 L["info_popup_" .. PIRATE.name] = [[¡Eres un Pirata! Lucha con tu equipo y sigue las órdenes del capitán.]]
