@@ -7,8 +7,8 @@ L["search_role_" .. PIRATE.abbr] = "Diese Person war ein Pirat!"
 L["target_" .. PIRATE.name] = "Pirat"
 L["ttt2_desc_" .. PIRATE.name] = [[Piraten sind neutral. Sie kümmern sich nicht um gut und böse... das Geld muss stimmen.
 So lange eine andere Person einen Vertrag mit dem Piraten geschlossen hat, kämpft er für sein Team.]]
-L["hilite_win_" .. TEAM_PIRATE] = "PIRATES WON" -- name of base role of a team -> maybe access with GetTeamRoles(ROLES.SERIALKILLER.team)[1].name
-L["win_" .. TEAM_PIRATE] = "Die Piraten haben gewonnen! ARRRR" -- teamname
+L["hilite_win_" .. TEAM_PIRATE] = "DIE PIRATEN GEWINNEN"
+L["win_" .. TEAM_PIRATE] = "Die Piraten haben gewonnen! ARRRR"
 L["ev_win_" .. TEAM_PIRATE] = "Die Piraten haben sich ihr Gold geholt!"
 
 L[PIRATE_CAPTAIN.name] = "Piraten Kapitän"
