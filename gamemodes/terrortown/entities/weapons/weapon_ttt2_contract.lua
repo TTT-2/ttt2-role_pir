@@ -58,6 +58,10 @@ function SWEP:MakeContract()
 		return
 	end
 
+	if CLIENT then
+		self:AddTTT2HUDHelp()
+	end
+
 	master.is_pir_master = true
 
 	--change the team of the pirate captain and his crew
