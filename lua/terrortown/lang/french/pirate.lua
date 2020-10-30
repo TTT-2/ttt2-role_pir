@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("french")
+local L = LANG.GetLanguageTableReference("french")
 
 L[PIRATE.name] = "Pirate"
 L["info_popup_" .. PIRATE.name] = [[Vous êtes un Pirate! ARRR ! Cherchez quelqu'un pour qui il vaut la peine de se battre - gagnez de l'or et des points.]]
