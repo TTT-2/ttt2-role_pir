@@ -1,6 +1,7 @@
 L = LANG.GetLanguageTableReference("Русский")
 
 L[PIRATE.name] = "Пират"
+--L[PIRATE.defaultTeam] = "Team Pirates"
 L["info_popup_" .. PIRATE.name] = [[Вы АРРР пират! Ищите кого-нибудь, чтобы сражаться - зарабатывайте золото и очки.]]
 L["body_found_" .. PIRATE.abbr] = "Это был пират..."
 L["search_role_" .. PIRATE.abbr] = "Этот человек был пиратом!"
