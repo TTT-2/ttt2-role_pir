@@ -4,9 +4,7 @@ if SERVER then
 	resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_pir.vmt")
 end
 
--- creates global var "TEAM_PIRATE" and other required things
--- TEAM_[name], data: e.g. icon, color,...
-roles.InitCustomTeam(ROLE.name, { -- this creates var "TEAM_PIRATE"
+roles.InitCustomTeam(ROLE.name, {
 		icon = "vgui/ttt/dynamic/roles/icon_pir",
 		color = Color(207, 148, 68, 255)
 })
@@ -48,22 +46,25 @@ end
 function ROLE:PreInitialize()
 	self.color = Color(207, 148, 68, 255)
 
-	self.abbr = "pir" -- abbreviation
-	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
-	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-	self.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
-	self.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
-	self.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
-	self.unknownTeam = true -- player don't know their teammates
+	self.abbr = "pir"
+	self.score.surviveBonusMultiplier = 0.5
+	self.score.timelimitMultiplier = -0.5
+	self.score.killsMultiplier = 2
+	self.score.teamKillsMultiplier = -8
+	self.score.bodyFoundMuliplier = 0
+	self.unknownTeam = true
 	self.preventWin = not ttt_pir_win_alone:GetBool()
 	self.avoidTeamIcons = false
 
+	self.defaultTeam = TEAM_PIRATE
+	self.defaultEquipment = SPECIAL_EQUIPMENT
+
 	self.conVarData = {
-		pct = 0.17, -- necessary: percentage of getting this role selected (per player)
-		maximum = 1, -- maximum amount of roles in a round
+		pct = 0.17,
+		maximum = 1,
 		random = 50,
-		minPlayers = 7, -- minimum amount of players until this role is able to get selected
-		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
+		minPlayers = 7,
+		togglable = true,
 	}
 end
 

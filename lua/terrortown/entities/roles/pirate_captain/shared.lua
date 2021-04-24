@@ -7,19 +7,22 @@ end
 function ROLE:PreInitialize()
 	self.color = Color(136, 81, 50, 255)
 
-	self.abbr = "cap" -- abbreviation
-	self.defaultTeam = TEAM_PIRATE -- the team name: roles with same team name are working together
-	self.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-	self.surviveBonus = 0 -- bonus multiplier for every survive while another player was killed
-	self.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
-	self.scoreTeamKillsMultiplier = -8 -- multiplier for teamkill
-	self.unknownTeam = true -- player don't know their teammates
+	self.abbr = "cap"
+	self.score.surviveBonusMultiplier = 0.5
+	self.score.timelimitMultiplier = -0.5
+	self.score.killsMultiplier = 2
+	self.score.teamKillsMultiplier = -8
+	self.score.bodyFoundMuliplier = 0
+	self.unknownTeam = true
 	self.preventWin = not GetConVar("ttt_pir_win_alone"):GetBool()
 	self.avoidTeamIcons = false
-	self.notSelectable = true -- role cant be selected!
+	self.notSelectable = true
+
+	self.defaultTeam = TEAM_PIRATE
+	self.defaultEquipment = SPECIAL_EQUIPMENT
 
 	self.conVarData = {
-		credits = 0, -- the starting credits of a specific role
+		credits = 0,
 		shopFallback = SHOP_DISABLED
 	}
 end
