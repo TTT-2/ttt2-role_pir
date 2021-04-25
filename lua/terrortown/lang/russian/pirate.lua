@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("Русский")
+L = LANG.GetLanguageTableReference("ru")
 
 L[PIRATE.name] = "Пират"
 --L[PIRATE.defaultTeam] = "Team Pirates"

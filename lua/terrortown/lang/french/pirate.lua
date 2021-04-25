@@ -1,4 +1,4 @@
-local L = LANG.GetLanguageTableReference("french")
+local L = LANG.GetLanguageTableReference("fr")
 
 L[PIRATE.name] = "Pirate"
 --L[PIRATE.defaultTeam] = "Team Pirates"
