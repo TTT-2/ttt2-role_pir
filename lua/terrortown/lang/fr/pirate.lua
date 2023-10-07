@@ -19,3 +19,6 @@ L["search_role_" .. PIRATE_CAPTAIN.abbr] = "Cette personne était un Capitaine d
 L["target_" .. PIRATE_CAPTAIN.name] = "Capitaine des Pirates"
 L["ttt2_desc_" .. PIRATE_CAPTAIN.name] = [[Le Capitaine des  Pirates est un rôle neutre. Il ne se soucie pas vraiment de ce qui est bon et de ce qui est mauvais... 
 Tout ce qui compte, c'est qu'il y ait de l'argent en jeu. Tant qu'une autre personne détient le contrat du Capitaine des Pirates, tous les Pirates font partie de la même équipe qu'elle.]]
+
+--L["label_pir_win_alone"] = "Pirates can win alone without an active contract"
+--L["label_pir_see_contractor_team"] = "Pirates can see the team of the contractor"

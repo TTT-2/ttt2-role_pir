@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("es")
+local L = LANG.GetLanguageTableReference("es")
 
 L[PIRATE.name] = "Pirata"
 --L[PIRATE.defaultTeam] = "Team Pirates"
@@ -19,3 +19,6 @@ L["search_role_" .. PIRATE_CAPTAIN.abbr] = "Esta persona era un Pirata Capitán.
 L["target_" .. PIRATE_CAPTAIN.name] = "Pirata Capitán"
 L["ttt2_desc_" .. PIRATE_CAPTAIN.name] = [[El Pirata es un rol neutral. Realmente no le importa el bien o el mal...
 todo lo que importa es que hay dinero en juego. Siempre y cuando alguien tenga el Contrato del Pirata Capitán, todos los piratas están en su equipo.]]
+
+--L["label_pir_win_alone"] = "Pirates can win alone without an active contract"
+--L["label_pir_see_contractor_team"] = "Pirates can see the team of the contractor"
