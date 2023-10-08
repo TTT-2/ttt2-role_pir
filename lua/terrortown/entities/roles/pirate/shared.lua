@@ -12,13 +12,6 @@ roles.InitCustomTeam(ROLE.name, {
 local ttt_pir_win_alone = CreateConVar("ttt_pir_win_alone", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 local ttt_pir_see_contractor_team = CreateConVar("ttt_pir_see_contractor_team", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 
-hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicPirCVars", function(tbl)
-	tbl[ROLE_PIRATE] = tbl[ROLE_PIRATE] or {}
-
-	table.insert(tbl[ROLE_PIRATE], {cvar = "ttt_pir_win_alone", checkbox = true, desc = "Pirates can win as team if they have no live contract (Def. 0)"})
-	--table.insert(tbl[ROLE_PIRATE], {cvar = "ttt_pir_see_contractor_team", checkbox = true, desc = "Pirates can see the team of the contractor (Def. 1)"})
-end)
-
 cvars.AddChangeCallback(ttt_pir_win_alone:GetName(), function(name, old, new)
 	PIRATE.preventWin = not ttt_pir_win_alone:GetBool()
 	PIRATE_CAPTAIN.preventWin = not ttt_pir_win_alone:GetBool()
@@ -91,4 +84,20 @@ if SERVER then
 			end
 		end
 	end)
+end
+
+if CLIENT then
+	function ROLE:AddToSettingsMenu(parent)
+		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
+
+		form:MakeCheckBox({
+			serverConvar = "ttt_pir_win_alone",
+			label = "label_pir_win_alone"
+		})
+
+		form:MakeCheckBox({
+			serverConvar = "ttt_pir_see_contractor_team",
+			label = "label_pir_see_contractor_team"
+		})
+	end
 end
